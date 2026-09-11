@@ -33,7 +33,7 @@
         <version.commons-io>2.21.0</version.commons-io>
         <version.fory>1.6.1</version.fory>
         <version.hessian>4.0.66</version.hessian>
-        <version.ideahut>26.08.26</version.ideahut>
+        <version.ideahut>26.09.09</version.ideahut>
         <version.jasperreports>6.17.0</version.jasperreports>
         <version.javax-mail>1.6.2</version.javax-mail>
         <version.jbcrypt>0.4</version.jbcrypt>
@@ -111,6 +111,18 @@
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-hibernate5</artifactId>
+		</dependency>
+		
+		
+		<!-- HESSIAN -->
+		<dependency>
+		    <groupId>com.caucho</groupId>
+		    <artifactId>hessian</artifactId>
+		    <version>${version.hessian}</version>
+		</dependency>
 		
 		
 		<!-- FORY -->
@@ -127,16 +139,23 @@
 		    <artifactId>kryo</artifactId>
 		    <version>${version.kryo}</version>
 		</dependency>
-		
-		
-		<!-- HESSIAN -->
+
+
+        <!-- APACHE HTTP MIME -->
 		<dependency>
-		    <groupId>com.caucho</groupId>
-		    <artifactId>hessian</artifactId>
-		    <version>${version.hessian}</version>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
 		</dependency>
 		
 		
+		<!-- REFLECTIONS -->
+		<dependency>
+		    <groupId>org.reflections</groupId>
+		    <artifactId>reflections</artifactId>
+		    <version>${version.reflections}</version>
+		</dependency>
+
+
 		<!-- LOMBOK -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -167,32 +186,6 @@
 		    <groupId>com.sun.mail</groupId>
 		    <artifactId>javax.mail</artifactId>
 		    <version>${version.javax-mail}</version>
-		</dependency>
-
-
-		<!-- JASPER REPORT -->
-		<dependency>
-		    <groupId>net.sf.jasperreports</groupId>
-		    <artifactId>jasperreports</artifactId>
-		    <version>${version.jasperreports}</version>
-		</dependency>
-		<dependency>
-		    <groupId>net.sf.jasperreports</groupId>
-		    <artifactId>jasperreports-fonts</artifactId>
-		    <version>${version.jasperreports}</version>
-		</dependency>
-
-
-		<!-- POI -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>${version.apache-poi}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>${version.apache-poi}</version>
 		</dependency>
 		
 		
@@ -227,7 +220,61 @@
 		    <artifactId>jjwt-jackson</artifactId>
 		    <version>${version.jjwt}</version>
 		</dependency>
+		
+		
+		<!-- JASPER REPORT -->
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>${version.jasperreports}</version>
+		</dependency>
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports-fonts</artifactId>
+		    <version>${version.jasperreports}</version>
+		</dependency>
 
+
+		<!-- POI -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${version.apache-poi}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${version.apache-poi}</version>
+		</dependency>
+		
+		
+		<!-- AGROAL -->
+		<dependency>
+			<groupId>io.agroal</groupId>
+			<artifactId>agroal-api</artifactId>
+			<version>${version.agroal}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.agroal</groupId>
+			<artifactId>agroal-pool</artifactId>
+			<version>${version.agroal}</version>
+		</dependency>
+
+
+		<!-- COMMONS DBCP2 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-dbcp2</artifactId>
+		</dependency>
+
+
+		<!--
+		 +++++++++++++++++
+		 +               +
+		 +  JDBC DRIVER  +
+		 +               +
+		 +++++++++++++++++ 
+		-->
 
 		<!-- MYSQL -->
 		<dependency>
@@ -235,55 +282,47 @@
 			<artifactId>mysql-connector-j</artifactId>
 		</dependency>
 
-
 		<!-- POSTGRESQL -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-		
 
 		<!-- SQL SERVER -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 		</dependency>
-		
 
 		<!-- ORACLE -->
 		<dependency>
 		    <groupId>com.oracle.database.jdbc</groupId>
 		    <artifactId>ojdbc8</artifactId>
 		</dependency>
-		
 
 		<!-- MARIADB -->
 		<dependency>
   			<groupId>org.mariadb.jdbc</groupId>
   			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
-		
 
 		<!-- DB2 -->
 		<dependency>
 			<groupId>com.ibm.db2</groupId>
 		  	<artifactId>jcc</artifactId>
 		</dependency>
-		
 
 		<!-- H2 -->
 		<dependency>
 		    <groupId>com.h2database</groupId>
 		    <artifactId>h2</artifactId>
 		</dependency>
-		
 
 		<!-- HSQLDB -->
 		<dependency>
 		    <groupId>org.hsqldb</groupId>
 		    <artifactId>hsqldb</artifactId>
 		</dependency>
-		
 
 		<!-- DERBY -->
 		<dependency>
