@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.ideahut.springboot.definition.LauncherDefinition;
 import net.ideahut.springboot.helper.FrameworkHelper;
 import net.ideahut.springboot.helper.ObjectHelper;
+import net.ideahut.springboot.helper.StringHelper;
+import net.ideahut.springboot.job.SchedulerHandler;
 import net.ideahut.springboot.launcher.WebFluxLauncher;
 import net.ideahut.springboot.launcher.WebLauncher;
 import net.ideahut.springboot.template.app.AppProperties;
@@ -54,6 +56,17 @@ public class Application extends WebFluxLauncher {
 	@Override
 	public void onReady(ApplicationContext applicationContext) {
 		setReady(true);
+		AppProperties appProperties = FrameworkHelper.getBean(applicationContext, AppProperties.class);
+		if (Boolean.TRUE.equals(appProperties.getAutoStartScheduler())) {
+			FrameworkHelper.getMapBean(applicationContext, SchedulerHandler.class)
+			.forEach((name, scheduler) -> {
+				try {
+					scheduler.start();
+				} catch (Exception e) {
+					log.error(StringHelper.format("Failed to start scheduler: {}", name), e);
+				}
+			});
+		}
 	}
 	
 	/*

@@ -15,15 +15,7 @@
         "separator": "cell",
         "selection": "single",
         "page": {
-            "options": [
-                5,
-                10,
-                15,
-                20,
-                25,
-                30,
-                50
-            ],
+            "options": [5, 10, 15, 20, 25, 30, 50],
             "default": 20,
             "count": false
         },
@@ -180,15 +172,7 @@
                 "separator": "cell",
                 "selection": "single",
                 "page": {
-                    "options": [
-                        5,
-                        10,
-                        15,
-                        20,
-                        25,
-                        30,
-                        50
-                    ],
+                    "options": [5, 10, 15, 20, 25, 30, 50],
                     "default": 20,
                     "count": false
                 },
@@ -261,15 +245,7 @@
                 "separator": "cell",
                 "selection": "single",
                 "page": {
-                    "options": [
-                        5,
-                        10,
-                        15,
-                        20,
-                        25,
-                        30,
-                        50
-                    ],
+                    "options": [5, 10, 15, 20, 25, 30, 50],
                     "default": 20,
                     "count": false
                 },
@@ -342,12 +318,12 @@
                 "type": "COMPOSITE",
                 "fields": [
                     "typeId",
-                    "name"
+                    "paramName"
                 ]
             },
             "relations": [
                 {
-                    "source": "type.typeId",
+                    "source": "jobType.typeId",
                     "target": "typeId"
                 }
             ],
@@ -355,25 +331,17 @@
                 "separator": "cell",
                 "selection": "single",
                 "page": {
-                    "options": [
-                        5,
-                        10,
-                        15,
-                        20,
-                        25,
-                        30,
-                        50
-                    ],
+                    "options": [5, 10, 15, 20, 25, 30, 50],
                     "default": 20,
                     "count": false
                 },
                 "order": {
-                    "field": "name",
+                    "field": "paramName",
                     "descending": false
                 },
                 "filters": [
                     {
-                        "name": "name",
+                        "name": "paramName",
                         "label": "Name",
                         "type": "text",
                         "condition": "ANY_LIKE"
@@ -386,14 +354,14 @@
                     }
                 ],
                 "visibles": [
-                    "name",
+                    "paramName",
                     "description"
                 ],
                 "columns": [
                     {
-                        "name": "name",
+                        "name": "paramName",
                         "label": "Name",
-                        "field": "name",
+                        "field": "paramName",
                         "align": "left",
                         "sortable": true
                     },
@@ -417,7 +385,7 @@
                     {
                         "name": "net.ideahut.springboot.job.entity.JobGroup",
                         "alias": "JobGroup",
-                        "store": "group",
+                        "store": "jobGroup",
                         "match": "exact",
                         "relations": [
                             {
@@ -429,8 +397,8 @@
                     {
                         "name": "net.ideahut.springboot.job.entity.JobType",
                         "alias": "JobType",
-                        "store": "type",
-                        "match": "exact",
+                        "store": "jobType",
+                        "match": "contain",
                         "relations": [
                             {
                                 "source": "typeId",
@@ -441,7 +409,7 @@
                     {
                         "name": "net.ideahut.springboot.job.entity.JobInstance",
                         "alias": "JobInstance",
-                        "store": "instance",
+                        "store": "jobInstance",
                         "match": "contain",
                         "relations": [
                             {
@@ -478,15 +446,7 @@
                 "separator": "cell",
                 "selection": "single",
                 "page": {
-                    "options": [
-                        5,
-                        10,
-                        15,
-                        20,
-                        25,
-                        30,
-                        50
-                    ],
+                    "options": [5, 10, 15, 20, 25, 30, 50],
                     "default": 20,
                     "count": false
                 },
@@ -565,7 +525,7 @@
                     {
                         "name": "JobType.name",
                         "label": "Type",
-                        "field": "type",
+                        "field": "jobType",
                         "align": "left",
                         "sortable": true,
                         "format": "function(val, row) { return $h.grid.field(val, 'name'); }"
@@ -612,7 +572,7 @@
                     {
                         "name": "JobInstance.name",
                         "label": "Instance",
-                        "field": "instance",
+                        "field": "jobInstance",
                         "align": "left",
                         "sortable": true,
                         "format": "function(val, row) { return $h.grid.field(val, 'name'); }"
@@ -678,7 +638,7 @@
                     ]
                 },
                 {
-                    "name": "type",
+                    "name": "jobType",
                     "label": "Type",
                     "type": "pick",
                     "pick": "type",
@@ -778,14 +738,14 @@
                     ]
                 },
                 {
-                    "name": "instance",
+                    "name": "jobInstance",
                     "label": "Instance",
                     "type": "pick",
                     "pick": "instance",
                     "nullable": true,
                     "insertable": true,
                     "editable": true,
-                    "rowToValue": "function(row) { try { return {'instanceId': row.instance.instanceId, 'name': row.instance.name}; } catch(e) { return null; } }",
+                    "rowToValue": "function(row) { try { return {'instanceId': row.jobInstance.instanceId, 'name': row.jobInstance.name}; } catch(e) { return null; } }",
                     "format": "function(val, row) { try { if(val) { return val.name; } else { return ''; } } catch(e) { return val; } }",
                     "toValue": "function(val) { try { return {'instanceId': val.instanceId}; } catch(e) { return null; } }",
                     "nullValue": "function() { return {'instanceId': null}; }"
@@ -802,7 +762,7 @@
                         "fields": [
                             "triggerId",
                             "typeId",
-                            "name"
+                            "paramName"
                         ]
                     },
                     "copy": false,
@@ -817,7 +777,7 @@
                             "target": "triggerId"
                         },
                         {
-                            "source": "type.typeId",
+                            "source": "jobType.typeId",
                             "target": "typeId"
                         }
                     ],
@@ -828,51 +788,43 @@
                         },
                         {
                             "title": "Group",
-                            "value": "group.name"
+                            "value": "jobGroup.name"
                         },
                         {
                             "title": "Type",
-                            "value": "type.name"
+                            "value": "jobType.name"
                         }
                     ],
                     "table": {
                         "separator": "cell",
                         "selection": "single",
                         "page": {
-                            "options": [
-                                5,
-                                10,
-                                15,
-                                20,
-                                25,
-                                30,
-                                50
-                            ],
+                            "options": [5, 10, 15, 20, 25, 30, 50],
                             "default": 20,
                             "count": false
                         },
                         "order": {
-                            "field": "name",
+                            "field": "paramName",
                             "descending": false
                         },
                         "visibles": [
-                            "name",
-                            "value",
+                            "paramName",
+                            "configValue",
                             "updatedOn",
                             "createdOn"
                         ],
                         "columns": [
                             {
-                                "name": "name",
+                                "name": "paramName",
                                 "label": "Name",
-                                "field": "name",
+                                "field": "paramName",
                                 "align": "left",
                                 "sortable": true
                             },
                             {
-                                "name": "value",
+                                "name": "configValue",
                                 "label": "Value",
-                                "field": "value",
+                                "field": "configValue",
                                 "align": "left",
                                 "sortable": true
                             },
@@ -896,7 +848,7 @@
                     },
                     "fields": [
                         {
-                            "name": "name",
+                            "name": "paramName",
                             "label": "Name",
                             "type": "pick",
                             "pick": "parameter",
@@ -907,11 +859,11 @@
                                 "required",
                                 "maxlength:100"
                             ],
-                            "format": "function(val, row) { try { return val.name || row.name; } catch(e) { return val.name; } }",
-                            "toValue": "function(val) { try { return {'name': val.name}; } catch(e) { return null; } }"
+                            "format": "function(val, row) { try { return val.paramName || row.paramName; } catch(e) { return val.paramName; } }",
+                            "toValue": "function(val) { try { return {'paramName': val.paramName}; } catch(e) { return null; } }"
                         },
                         {
-                            "name": "value",
+                            "name": "configValue",
                             "label": "Value",
                             "type": "text",
                             "nullable": true,
